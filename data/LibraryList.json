@@ -1,0 +1,43 @@
+[
+	{
+		"id": 1,
+		"title": "Who are we ?",
+		"description": "OneInvo help you Make your life easier and hassle free by going digital on Paper Receipts."
+	},
+
+	{
+		"id": 2,
+		"title": "How we work ?",
+		"description": "For every product you purchase, you can view the bill on your device and you can access it anywhere and at anytime. Never lose another receipt, We have got you covered."
+	},
+
+	{
+		"id": 3,
+		"title": "Why eReceipt ?",
+		"description": "By using eReceipt, you contribute in saving million of trees, billion gallons of water, reduce CO2 Emission and decrease Toxic solid non-recyclable waste."
+	},
+
+	{
+		"id": 4,
+		"title": "Is the App free ?",
+		"description": "Certainly, the App is free of cost to use but few features come for a cost. Those features include, Accessing receipt after 6 Months and No-Ads."
+	},
+
+	{
+		"id": 5,
+		"title": "Can I pay directly through the Application itself ?",
+		"description": "Not as of now, but we're working on it and will include it in our future updates."
+	},
+
+	{
+		"id": 6,
+		"title": "Is my Personal Data shared ?",
+		"description": "No, OneInvo ensure total Data Encryption and Users Data is completely secured. However, your Unique ID number will be shared with 3rd Party in order to receive the Receipt only to your device."
+	},
+
+	{
+		"id": 7,
+		"title": "Can I receive the Receipt even when my device is Offline ?",
+		"description": "Yes, but only when the user's Device connects to the internet. If your device is not physically available you need to remember the unique ID to get the receipt."
+	}
+]

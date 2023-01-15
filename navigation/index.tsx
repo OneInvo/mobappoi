@@ -4,8 +4,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { Pressable } from "react-native";
+import AppIntro from "../components/AppIntro";
 
 import Dummy from "../screens/Dummy";
+import { useReduxSelector } from "../store/store";
 import {
 	RootStackParamList,
 	RootTabParamList,
@@ -13,7 +15,11 @@ import {
 } from "../types";
 
 export default function Navigation() {
-	return (
+	const showIntro = useReduxSelector((state) => state.auth.showIntro);
+
+	return showIntro ? (
+		<AppIntro />
+	) : (
 		<NavigationContainer>
 			<RootNavigator />
 		</NavigationContainer>
