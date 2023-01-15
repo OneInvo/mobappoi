@@ -54,6 +54,11 @@ const authSlice = createSlice({
 		setShowIntro: (state, action: { payload: boolean }) => {
 			state.showIntro = action.payload;
 		},
+
+		//dummy
+		setIsLoggedIn: (state, action: { payload: boolean }) => {
+			state.isLoggedIn = action.payload;
+		},
 	},
 	extraReducers(builder) {
 		builder.addCase(login.pending, (state) => {

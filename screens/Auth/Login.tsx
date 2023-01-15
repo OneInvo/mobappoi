@@ -10,6 +10,8 @@ import { TextInput } from "../../components/TextInput";
 import ScreenView from "../../components/ScreenView";
 import AuthLogo from "../../components/AuthLogo";
 import { AuthStackScreenProps } from "../../types";
+import { useReduxDispatch } from "../../store/store";
+import { authActions } from "../../store/authSlice";
 
 interface ILoginProps {}
 
@@ -21,9 +23,13 @@ type LoginFormValues = {
 const LoginScreen: React.FC<ILoginProps & AuthStackScreenProps<"login">> = ({
 	navigation,
 }) => {
+	const dispatch = useReduxDispatch();
+
 	const { ...methods } = useForm<LoginFormValues>({ mode: "onChange" });
-	const onSubmit: SubmitHandler<LoginFormValues> = (data) =>
+	const onSubmit: SubmitHandler<LoginFormValues> = (data) => {
 		console.log(data);
+		dispatch(authActions.setIsLoggedIn(true));
+	};
 
 	const [formError, setError] = React.useState<Boolean>(false);
 	const onError: SubmitErrorHandler<LoginFormValues> = (errors, e) => {
