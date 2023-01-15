@@ -14,6 +14,7 @@ const initialState = {
 	error: "",
 	loading: false,
 	showIntro: true,
+	isLoggedIn: false,
 };
 
 const login = createAsyncThunk(
@@ -62,10 +63,12 @@ const authSlice = createSlice({
 		builder.addCase(login.fulfilled, (state, action) => {
 			state.loading = false;
 			state.user = action.payload as unknown as UserCredential;
+			state.isLoggedIn = true;
 		});
 		builder.addCase(login.rejected, (state) => {
 			state.loading = false;
 			state.error = "Authentication Failed";
+			state.isLoggedIn = false;
 		});
 		builder.addCase(logout.pending, (state) => {
 			state.loading = true;
