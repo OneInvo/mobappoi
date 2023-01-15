@@ -109,17 +109,21 @@ const RegisterScreen: React.FC<
 				<Text style={styles.registerText}>Sign Up</Text>
 			</Pressable>
 			<Pressable onPress={methods.handleSubmit(onSubmit, onError)}>
-				<Text style={styles.boldText}>Terms &amp; Privacy Policy</Text>
+				<Text
+					style={[
+						styles.boldText,
+						{ marginTop: 20, marginBottom: 40 },
+					]}
+				>
+					Terms &amp; Privacy Policy
+				</Text>
 			</Pressable>
 			<View style={styles.row}>
 				<Text style={[styles.text, { marginRight: 10 }]}>
 					Already have an account?
 				</Text>
-				<Pressable
-					style={styles.loginBox}
-					onPress={() => navigation.navigate("login")}
-				>
-					<Text style={[styles.boldText]}>Log In</Text>
+				<Pressable onPress={() => navigation.navigate("login")}>
+					<Text style={styles.boldText}>Log In</Text>
 				</Pressable>
 			</View>
 		</ScreenView>
@@ -147,8 +151,6 @@ const styles = StyleSheet.create({
 	boldText: {
 		fontWeight: "bold",
 		alignSelf: "center",
-		marginTop: 20,
-		marginBottom: 40,
 	},
 	row: {
 		flexDirection: "row",
@@ -159,8 +161,5 @@ const styles = StyleSheet.create({
 	text: {
 		fontSize: 14,
 		color: "#aaa",
-	},
-	loginBox: {
-		marginBottom: -20,
 	},
 });
