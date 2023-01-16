@@ -45,6 +45,11 @@ const LoginScreen: React.FC<ILoginProps & AuthStackScreenProps<"login">> = ({
 		return console.log({ errors });
 	};
 
+	const registerHandler = () => {
+		dispatch(authActions.setError(""));
+		navigation.navigate("register");
+	};
+
 	return (
 		<ScreenView>
 			<AuthLogo />
@@ -106,7 +111,7 @@ const LoginScreen: React.FC<ILoginProps & AuthStackScreenProps<"login">> = ({
 					<Text style={[styles.text, { marginRight: 10 }]}>
 						Don't have an account?
 					</Text>
-					<Pressable onPress={() => navigation.navigate("register")}>
+					<Pressable onPress={registerHandler}>
 						<Text style={styles.boldText}>Sign Up</Text>
 					</Pressable>
 				</View>

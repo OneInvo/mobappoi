@@ -18,7 +18,7 @@ const persistConfig = {
 	key: "root",
 	storage: AsyncStorage,
 	stateReconciler: autoMergeLevel2,
-	whitelist: ["auths"],
+	whitelist: ["auth"],
 };
 // wrap persist API around root reducer and store
 const persistedReducer = persistReducer<RootState>(persistConfig, reducers);

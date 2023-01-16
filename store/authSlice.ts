@@ -79,6 +79,9 @@ const authSlice = createSlice({
 		setShowIntro: (state, action: { payload: boolean }) => {
 			state.showIntro = action.payload;
 		},
+		setError: (state, action: { payload: string }) => {
+			state.error = action.payload;
+		},
 
 		//dummy
 		setIsLoggedIn: (state, action: { payload: boolean }) => {

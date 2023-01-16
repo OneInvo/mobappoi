@@ -1,5 +1,11 @@
 import * as React from "react";
-import { View, Pressable, Text, StyleSheet } from "react-native";
+import {
+	View,
+	Pressable,
+	Text,
+	StyleSheet,
+	ActivityIndicator,
+} from "react-native";
 import AuthLogo from "../../components/AuthLogo";
 import ScreenView from "../../components/ScreenView";
 import {
@@ -10,6 +16,9 @@ import {
 } from "react-hook-form";
 import { TextInput } from "../../components/TextInput";
 import { AuthStackScreenProps } from "../../types";
+import { useReduxDispatch, useReduxSelector } from "../../store/store";
+import { authActions } from "../../store/authSlice";
+import ERRORS from "../../data/errors.json";
 
 interface IRegisterProps {}
 
@@ -24,10 +33,17 @@ type RegisterFormValues = {
 const RegisterScreen: React.FC<
 	IRegisterProps & AuthStackScreenProps<"register">
 > = ({ navigation }) => {
+	const dispatch = useReduxDispatch();
+	const { error, loading } = useReduxSelector((state) => state.auth);
+
 	const { ...methods } = useForm<RegisterFormValues>({ mode: "onChange" });
 	const onSubmit: SubmitHandler<RegisterFormValues> = (data) => {
-		console.log(data);
-		navigation.navigate("otp");
+		if (data.password !== data.confirmpassword) {
+			alert("Passwords do not match!");
+			return;
+		}
+		dispatch(authActions.register(data));
+		// navigation.navigate("otp");
 	};
 
 	const [formError, setError] = React.useState<Boolean>(false);
@@ -101,12 +117,20 @@ const RegisterScreen: React.FC<
 					leftIcon="lock-closed-outline"
 				/>
 			</FormProvider>
+			{error && (
+				/* @ts-ignore */
+				<Text style={styles.errorText}>{ERRORS[error] || error}</Text>
+			)}
 			<Pressable
 				onPress={methods.handleSubmit(onSubmit, onError)}
 				style={styles.button}
 				android_ripple={{ color: "gray" }}
 			>
-				<Text style={styles.registerText}>Sign Up</Text>
+				{loading ? (
+					<ActivityIndicator />
+				) : (
+					<Text style={styles.registerText}>Sign Up</Text>
+				)}
 			</Pressable>
 			<Pressable onPress={methods.handleSubmit(onSubmit, onError)}>
 				<Text
@@ -161,5 +185,11 @@ const styles = StyleSheet.create({
 	text: {
 		fontSize: 14,
 		color: "#aaa",
+	},
+	errorText: {
+		color: "red",
+		alignSelf: "center",
+		marginTop: 15,
+		fontWeight: "bold",
 	},
 });
