@@ -60,7 +60,7 @@ const ProfileScreen: React.FC<IProfileScreenProps> = (props) => {
 			</View>
 			<View style={styles.miniBox}>
 				<Text style={styles.miniTitle}>Total Bills</Text>
-				<Text style={styles.miniText}>420</Text>
+				<Text style={styles.miniText}>380</Text>
 			</View>
 			<View style={styles.miniBox}>
 				<Text style={styles.miniTitle}>Password</Text>

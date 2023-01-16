@@ -38,7 +38,6 @@ const LoginScreen: React.FC<ILoginProps & AuthStackScreenProps<"login">> = ({
 
 	const { ...methods } = useForm<LoginFormValues>({ mode: "onChange" });
 	const onSubmit: SubmitHandler<LoginFormValues> = (data) => {
-		console.log(data);
 		dispatch(authActions.login(data));
 	};
 
