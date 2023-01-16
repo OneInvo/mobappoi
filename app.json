@@ -1,32 +1,43 @@
 {
-	"expo": {
-		"name": "OneInvo",
-		"slug": "oneinvo",
-		"version": "1.0.0",
-		"orientation": "portrait",
-		"icon": "./assets/images/icon.png",
-		"scheme": "myapp",
-		"userInterfaceStyle": "automatic",
-		"splash": {
-			"image": "./assets/images/splash.png",
-			"resizeMode": "cover",
-			"backgroundColor": "#ffffff"
-		},
-		"updates": {
-			"fallbackToCacheTimeout": 0
-		},
-		"assetBundlePatterns": ["**/*"],
-		"ios": {
-			"supportsTablet": true
-		},
-		"android": {
-			"adaptiveIcon": {
-				"foregroundImage": "./assets/images/adaptive-icon.png",
-				"backgroundColor": "#ffffff"
-			}
-		},
-		"web": {
-			"favicon": "./assets/images/favicon.png"
-		}
-	}
+  "expo": {
+    "name": "OneInvo",
+    "slug": "oneinvo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/fceff58c-bfae-4489-91d5-822c6cb1cfd5"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "fceff58c-bfae-4489-91d5-822c6cb1cfd5"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    }
+  }
 }
