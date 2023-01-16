@@ -23,23 +23,48 @@ const login = createAsyncThunk(
 		{ email, password }: { email: string; password: string },
 		thunkAPI
 	) => {
-		signInWithEmailAndPassword(auth, email, password)
-			.then((user) => thunkAPI.fulfillWithValue(user))
-			.catch(() => {
-				createUserWithEmailAndPassword(auth, email, password)
-					.then((user) => thunkAPI.fulfillWithValue(user))
-					.catch(() =>
-						thunkAPI.rejectWithValue("Authentication Failed")
-					);
-			});
+		let response;
+
+		try {
+			response = await signInWithEmailAndPassword(auth, email, password);
+			return thunkAPI.fulfillWithValue(response);
+		} catch (e: any) {
+			return thunkAPI.rejectWithValue(e.code);
+		}
 	}
 );
 
 const logout = createAsyncThunk("auth/logout", async (_payload, thunkAPI) => {
-	signOut(auth)
-		.then(() => thunkAPI.fulfillWithValue(""))
-		.catch((err) => thunkAPI.rejectWithValue(err));
+	let response;
+
+	try {
+		response = await signOut(auth);
+		return thunkAPI.fulfillWithValue(response);
+	} catch (e: any) {
+		return thunkAPI.rejectWithValue(e.code);
+	}
 });
+
+const register = createAsyncThunk(
+	"auth/register",
+	async (
+		{ email, password }: { email: string; password: string },
+		thunkAPI
+	) => {
+		let response;
+
+		try {
+			response = await createUserWithEmailAndPassword(
+				auth,
+				email,
+				password
+			);
+			return thunkAPI.fulfillWithValue(response);
+		} catch (e: any) {
+			return thunkAPI.rejectWithValue(e.code);
+		}
+	}
+);
 
 const authSlice = createSlice({
 	name: "auth",
@@ -70,9 +95,9 @@ const authSlice = createSlice({
 			state.user = action.payload as unknown as UserCredential;
 			state.isLoggedIn = true;
 		});
-		builder.addCase(login.rejected, (state) => {
+		builder.addCase(login.rejected, (state, action) => {
 			state.loading = false;
-			state.error = "Authentication Failed";
+			state.error = action.payload as string;
 			state.isLoggedIn = false;
 		});
 		builder.addCase(logout.pending, (state) => {
@@ -82,6 +107,20 @@ const authSlice = createSlice({
 		builder.addCase(logout.fulfilled, (state, action) => {
 			return initialState;
 		});
+		builder.addCase(register.pending, (state) => {
+			state.loading = true;
+			state.error = "";
+		});
+		builder.addCase(register.fulfilled, (state, action) => {
+			state.loading = false;
+			state.user = action.payload as unknown as UserCredential;
+			state.isLoggedIn = true;
+		});
+		builder.addCase(register.rejected, (state, action) => {
+			state.loading = false;
+			state.error = action.payload as string;
+			state.isLoggedIn = false;
+		});
 	},
 });
 
@@ -90,4 +129,5 @@ export const authActions = {
 	...authSlice.actions,
 	login,
 	logout,
+	register,
 };

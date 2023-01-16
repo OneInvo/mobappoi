@@ -1,5 +1,12 @@
 import * as React from "react";
-import { View, Text, StyleSheet, Image, Pressable } from "react-native";
+import {
+	View,
+	Text,
+	StyleSheet,
+	Image,
+	Pressable,
+	ActivityIndicator,
+} from "react-native";
 import {
 	useForm,
 	FormProvider,
@@ -10,8 +17,9 @@ import { TextInput } from "../../components/TextInput";
 import ScreenView from "../../components/ScreenView";
 import AuthLogo from "../../components/AuthLogo";
 import { AuthStackScreenProps } from "../../types";
-import { useReduxDispatch } from "../../store/store";
+import { useReduxDispatch, useReduxSelector } from "../../store/store";
 import { authActions } from "../../store/authSlice";
+import ERRORS from "../../data/errors.json";
 
 interface ILoginProps {}
 
@@ -24,11 +32,12 @@ const LoginScreen: React.FC<ILoginProps & AuthStackScreenProps<"login">> = ({
 	navigation,
 }) => {
 	const dispatch = useReduxDispatch();
+	const { error, loading } = useReduxSelector((state) => state.auth);
 
 	const { ...methods } = useForm<LoginFormValues>({ mode: "onChange" });
 	const onSubmit: SubmitHandler<LoginFormValues> = (data) => {
 		console.log(data);
-		dispatch(authActions.setIsLoggedIn(true));
+		dispatch(authActions.login(data));
 	};
 
 	const [formError, setError] = React.useState<Boolean>(false);
@@ -71,12 +80,18 @@ const LoginScreen: React.FC<ILoginProps & AuthStackScreenProps<"login">> = ({
 					<Text style={styles.boldText}>Get help signing in</Text>
 				</Pressable>
 			</View>
+			{/* @ts-ignore */}
+			{error && <Text style={styles.errorText}>{ERRORS[error]}</Text>}
 			<Pressable
 				onPress={methods.handleSubmit(onSubmit, onError)}
 				style={styles.button}
 				android_ripple={{ color: "gray" }}
 			>
-				<Text style={styles.loginText}>Login</Text>
+				{loading ? (
+					<ActivityIndicator />
+				) : (
+					<Text style={styles.loginText}>Login</Text>
+				)}
 			</Pressable>
 			<View style={styles.column}>
 				<Text style={styles.or}>OR</Text>
@@ -147,5 +162,11 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		width: "55%",
 		marginVertical: 25,
+	},
+	errorText: {
+		color: "red",
+		alignSelf: "center",
+		marginTop: 15,
+		fontWeight: "bold",
 	},
 });

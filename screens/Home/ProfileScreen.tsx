@@ -39,7 +39,7 @@ const ProfileScreen: React.FC<IProfileScreenProps> = (props) => {
 	const dispatch = useReduxDispatch();
 
 	const logoutHandler = () => {
-		dispatch(authActions.setIsLoggedIn(false));
+		dispatch(authActions.logout());
 	};
 
 	return (
