@@ -34,7 +34,7 @@ const HomeScreen: React.FC<IHomeScreenProps> = (props) => {
 	};
 
 	return (
-		<ScreenView>
+		<ScreenView scroll>
 			<Text style={styles.title}>Hello, user123</Text>
 			<FlatList
 				extraData={selectedTab}
@@ -64,6 +64,11 @@ const HomeScreen: React.FC<IHomeScreenProps> = (props) => {
 				style={{ maxHeight: 0.4 * vh }}
 				showsHorizontalScrollIndicator={false}
 			/>
+			<Text style={styles.headText}>Insights</Text>
+			<View style={styles.insightCircle}>
+				<Text style={styles.money}>$53.62</Text>
+				<Text>spent so far</Text>
+			</View>
 		</ScreenView>
 	);
 };
@@ -97,7 +102,7 @@ const styles = StyleSheet.create({
 	headText: {
 		fontSize: 20,
 		fontWeight: "bold",
-		marginBottom: 20,
+		marginVertical: 20,
 	},
 
 	imageContainer: {
@@ -108,5 +113,20 @@ const styles = StyleSheet.create({
 	image: {
 		width: 120,
 		height: 0.4 * vh,
+	},
+
+	insightCircle: {
+		width: 150,
+		height: 150,
+		borderRadius: 75,
+		borderWidth: 3,
+		borderColor: "goldenrod",
+		justifyContent: "center",
+		alignItems: "center",
+		alignSelf: "center",
+	},
+	money: {
+		fontSize: 24,
+		fontWeight: "bold",
 	},
 });
