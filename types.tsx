@@ -17,18 +17,12 @@ export type AuthStackParamList = {
 export type AuthStackScreenProps<Screen extends keyof AuthStackParamList> =
 	NativeStackScreenProps<AuthStackParamList, Screen>;
 
-export type RootStackParamList = {
-	root: undefined;
-	notFound: undefined;
-};
-
 export type RootTabParamList = {
-	TabOne: undefined;
-	TabTwo: undefined;
+	Home: undefined;
+	Info: undefined;
+	Settings: undefined;
+	Profile: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
-	CompositeScreenProps<
-		BottomTabScreenProps<RootTabParamList, Screen>,
-		NativeStackScreenProps<RootStackParamList>
-	>;
+	BottomTabScreenProps<RootTabParamList, Screen>;
