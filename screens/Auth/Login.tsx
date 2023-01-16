@@ -20,6 +20,8 @@ import { AuthStackScreenProps } from "../../types";
 import { useReduxDispatch, useReduxSelector } from "../../store/store";
 import { authActions } from "../../store/authSlice";
 import ERRORS from "../../data/errors.json";
+// import { signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
+// import { auth, googleProvider } from "../../firebaseConfig";
 
 interface ILoginProps {}
 
@@ -49,6 +51,9 @@ const LoginScreen: React.FC<ILoginProps & AuthStackScreenProps<"login">> = ({
 		dispatch(authActions.setError(""));
 		navigation.navigate("register");
 	};
+
+	const googleHandler = async () => {};
+	const facebookHandler = async () => {};
 
 	return (
 		<ScreenView>
@@ -102,10 +107,16 @@ const LoginScreen: React.FC<ILoginProps & AuthStackScreenProps<"login">> = ({
 				<Text style={styles.or}>OR</Text>
 				<Text style={styles.text}>Sign up using</Text>
 				<View style={styles.social}>
-					<Image source={require("../../assets/logos/google.png")} />
-					<Image
-						source={require("../../assets/logos/facebook.png")}
-					/>
+					<Pressable onPress={googleHandler}>
+						<Image
+							source={require("../../assets/logos/google.png")}
+						/>
+					</Pressable>
+					<Pressable onPress={facebookHandler}>
+						<Image
+							source={require("../../assets/logos/facebook.png")}
+						/>
+					</Pressable>
 				</View>
 				<View style={styles.row}>
 					<Text style={[styles.text, { marginRight: 10 }]}>
