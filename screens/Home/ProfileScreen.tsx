@@ -10,6 +10,9 @@ import {
 } from "react-hook-form";
 import { TextInput } from "../../components/TextInput";
 import { vh } from "../../constants/Layout";
+import { Ionicons } from "@expo/vector-icons";
+import { useReduxDispatch } from "../../store/store";
+import { authActions } from "../../store/authSlice";
 
 interface IProfileScreenProps {}
 
@@ -31,6 +34,12 @@ const ProfileScreen: React.FC<IProfileScreenProps> = (props) => {
 	const [formError, setError] = React.useState<Boolean>(false);
 	const onError: SubmitErrorHandler<LoginFormValues> = (errors, e) => {
 		return console.log({ errors });
+	};
+
+	const dispatch = useReduxDispatch();
+
+	const logoutHandler = () => {
+		dispatch(authActions.setIsLoggedIn(false));
 	};
 
 	return (
@@ -66,6 +75,16 @@ const ProfileScreen: React.FC<IProfileScreenProps> = (props) => {
 			>
 				<Text style={styles.buttonText}>EDIT</Text>
 			</Pressable>
+			<Pressable
+				onPress={logoutHandler}
+				style={[styles.row, { marginTop: 30 }]}
+			>
+				<Ionicons name="log-out-outline" color="red" size={14} />
+				<Text style={{ fontSize: 14, color: "red", marginLeft: 5 }}>
+					Log Out
+				</Text>
+			</Pressable>
+
 			{/* @ts-ignore */}
 			<RBSheet
 				ref={sheetRef}
@@ -161,6 +180,11 @@ const ProfileScreen: React.FC<IProfileScreenProps> = (props) => {
 export default ProfileScreen;
 
 const styles = StyleSheet.create({
+	row: {
+		flexDirection: "row",
+		justifyContent: "center",
+		alignItems: "center",
+	},
 	topSection: {
 		justifyContent: "center",
 		alignItems: "center",
