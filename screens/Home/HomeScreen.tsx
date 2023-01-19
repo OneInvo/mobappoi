@@ -7,8 +7,11 @@ import {
 	ListRenderItem,
 	Pressable,
 	Image,
+	Modal,
+	Button,
 } from "react-native";
 import ScreenView from "../../components/ScreenView";
+import ImageViewer from "react-native-image-zoom-viewer";
 import { vh } from "../../constants/Layout";
 import TABS_DATA from "../../data/tabs.json";
 
@@ -16,6 +19,21 @@ interface IHomeScreenProps {}
 
 const HomeScreen: React.FC<IHomeScreenProps> = (props) => {
 	const [selectedTab, setSelectedTab] = React.useState(0);
+	const [visible, setVisible] = React.useState(false);
+	const [imageUrls, setImageUrls] = React.useState([
+		{
+			url: "",
+			props: {
+				source: require("../../assets/sample.png"),
+			},
+		},
+		{
+			url: "",
+			props: {
+				source: require("../../assets/sample.png"),
+			},
+		},
+	]);
 
 	const RenderItem: ListRenderItem<{ id: number; value: string }> = ({
 		item,
@@ -64,10 +82,33 @@ const HomeScreen: React.FC<IHomeScreenProps> = (props) => {
 				style={{ maxHeight: 0.4 * vh }}
 				showsHorizontalScrollIndicator={false}
 			/>
+			<View style={{ marginTop: 15 }}>
+				<Button
+					title="View All Receipts"
+					color="black"
+					onPress={() => setVisible(true)}
+				/>
+			</View>
 			<Text style={styles.headText}>Insights</Text>
 			<View style={styles.insightCircle}>
 				<Text style={styles.money}>$53.62</Text>
 				<Text>spent so far</Text>
+			</View>
+
+			<View style={{ flex: 1 }}>
+				<Modal
+					visible={visible}
+					transparent={false}
+					onRequestClose={() => setVisible(false)}
+				>
+					<Pressable
+						style={styles.closeButton}
+						onPress={() => setVisible(false)}
+					>
+						<Text style={styles.closeText}>Close</Text>
+					</Pressable>
+					<ImageViewer imageUrls={imageUrls} />
+				</Modal>
 			</View>
 		</ScreenView>
 	);
@@ -128,5 +169,18 @@ const styles = StyleSheet.create({
 	money: {
 		fontSize: 24,
 		fontWeight: "bold",
+	},
+
+	closeButton: {
+		position: "absolute",
+		right: 10,
+		top: 10,
+		zIndex: 1,
+		backgroundColor: "darkred",
+		padding: 5,
+		borderRadius: 5,
+	},
+	closeText: {
+		color: "white",
 	},
 });
