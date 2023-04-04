@@ -1,4 +1,4 @@
-OneInvo - GDSC Solution Challenge 2023
+# OneInvo - GDSC Solution Challenge 2023
 
 ## Prototype
 - git clone https://github.com/OneInvo/mobappoi.git
@@ -16,7 +16,7 @@ OneInvo - GDSC Solution Challenge 2023
 - iOS: exp://u.expo.dev/update/393ab34e-9f3a-4525-849e-40d73221f1a1
 - Android: exp://u.expo.dev/update/30972b7d-cdaf-47fd-8289-9398ba3a3c49
 
-## The application can be accessed after following these steps.
+### The application can be accessed after following these steps.
 
-# Username to login - test@oneinvo.com
-# Password to login - test123
+## Username to login - test@oneinvo.com
+## Password to login - test123
